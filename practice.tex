@@ -17,7 +17,7 @@
 
 \specsection{ВВЕДЕНИЕ}
 
-\texttt{BOB} --– это распределённая система хранения данных типа ключ-значение~\cite{BOB}. \texttt{BOB} проектировался для быстрой и надёжной работы с бинарными данными средних размеров (например, с изображениями). \texttt{BOB} постоянно развивается и обладает множеством запланированных задач разной сложности.
+\texttt{BOB} --- это распределённая система хранения данных типа ключ-значение~\cite{BOB}. \texttt{BOB} проектировался для быстрой и надёжной работы с бинарными данными средних размеров (например, с изображениями). \texttt{BOB} постоянно развивается и обладает множеством запланированных задач разной сложности.
 
 Цель производственной практики --- овладеть навыками разработки систем хранения данных, Web-приложений~\cite{web}, open source-проектов~\cite{oss} 
 
@@ -46,7 +46,13 @@
 
 \section{Характеристика предприятия}
 
-??? 
+Компания <<СитиСофт>> предоставляет высококачественные услуги для тех, кто стремится улучшить свой бизнес путем внедрения или обновления программно - аппаратной инфраструктуры.
+
+Продукты <<СитиСофт>> --- это специальные технические средства и комплексы, серверы и компьютерные компоненты, активное и пассивное сетевое оборудование, Системы Хранения Данных и специализированное ПО, а так же решения на базе оборудования ведущих мировых производителей и многое другое.
+
+Предлагаемые услуги включает самые востребованные на сегодняшний день IT-проекты, позволяющие масштабировать решения, получить максимальный технологический эффект. 
+
+Это построение специальных систем различного уровня, создание систем обработки и хранения данных, централизация и виртуализация IT-сервиса, информационная защита и резервное копирование, решения по видеонаблюдению, IP-телефонии и многое другое~\cite{citysoft}.
 
 \clearpage
 
@@ -67,9 +73,9 @@
 \section{Характеристика индивидуального задания для производственной практики}
 
 В ходе практики предстоит выполнить следующие индивидуальные задачи:
-\begin{enumerate}
+\begin{enumerate}[label={\arabic*.}]
   \item Студент должен овладеть навыками командной работы, что позволит ему эффективно сотрудничать с другими разработчиками в рамках проекта.
-  \item Спроектировать и разработать клиент для взаимодействия с API~\cite{api} \texttt{BOB}. Это важная задача, так как клиент будет обеспечивать сервер данными о распределенной системе хранения данных.
+  \item Спроектировать и разработать клиент для взаимодействия с API~\cite{api} \texttt{BOB}. Данную задачу необходимо реализовать в первую очередь, поскольку клиент будет обеспечивать сервер данными о распределенной системе хранения данных.
   \item Спроектировать собственный API~\cite{api}, который позволит серверной части Web-приложения~\cite{web} передавать данные внешнему интефейсу. Это API должно быть хорошо продумано, чтобы обеспечить удобный и эффективный доступ к данным \texttt{BOB}'a.
   \item Разработать серверную часть Web-приложения~\cite{web}, включив в него ранее разработанный клиент и API. Это будет являться основной частью работы, так как сервер должен обеспечивать функциональность авторизации, отображение информации о кластере, нодах, детальной информации о нодах и раскладке виртуальных дисков.
   \item Провести тестирование итогового Web-приложения~\cite{web}, чтобы убедиться в его работоспособности, надежности и соответствии поставленным задачам. 
@@ -81,174 +87,407 @@
 
 Производственная практика включает в себя сотрудничество её участников для эффективной реализации поставленных задач в рамках проекта \texttt{BOB}.
 
-В качетсве системы управления версиями в рамках разрабатываемого проекта использовался Git.
-Для хранения проекта, а также для контроля статуса выполнения задач и четкого понимания сроков выполнения поставленных задач, был использован web-инструмент GitLab~\cite{gitlab}
+В качетсве системы управления версиями в рамках разрабатываемого проекта использовался \texttt{Git}.
+Для хранения проекта, а также для контроля статуса выполнения задач и четкого понимания сроков выполнения, был использован web-инструмент GitLab~\cite{cowell2023automating}
 Участники проекта были распределены на 3 команды для равномерного распределения задач: команда отвечающая за интерфейс приложения, команда отвечающая за серверную часть приложения, а также команда дизайнеров.
-Далее в отчете будет идти речь о 
+
+В рамках вышеобозначенного инструмента \texttt{GitLab} была использована технология \texttt{CI/CD}\cite{cowell2023automating} для снижения рисков и повышения надежности программного обеспечения.
+
 \subsection{Анализ используемых технологий}
 
-\subsubsection{Основное приложение}
+В данном разделе проведен анализ технологий, использованных при разработке веб-интерфейса для мониторинга и управления кластером Боба
 
-В качестве языка программирования основного приложения используется функциональный язык \texttt{Clojure} ~\cite{clojure}, являющийся подмножеством языка \texttt{LISP} ~\cite{lisp} и поддерживающий библиотеки JVM ~\cite{jvm}, подходящий для обработки больших объёмов данных и построения высоконагруженных систем.
+\subsubsection{Rust}
 
-\subsubsection{Сервис по созданию отчётов}
+В качестве языка программирования основного приложения используется мультипарадигменный язык \texttt{Rust}~\cite{rust}. 
 
+\texttt{Rust} --- это язык программирования, ориентированный на безопасность, скорость и параллелизм.
+Его архитектура позволяет создавать программы, которые имеют высокую производительность и контроль на низком уровне, но с мощными высокоуровневыми абстракциями.
+\texttt{Rust} выполняет большую часть проверок и решений по управлению памятью во время компиляции, поэтому производительность во время выполнения программы не пострадает~\cite{rustbook}.
 
-Для передачи данных от приложения сервису была написана библиотека, определяющая транспортные типы данных. Данные передаются в виде сериализованных \texttt{JSON}-объектов~\cite{JSON}. Сервис при передаче критерия отчёта приложению также использует \texttt{JSON}-объект.
+В контексте web-серверов, \texttt{Rust} становится особенно привлекательным выбором.
+Этот язык позволяет разработчикам создавать высокопроизводительные web-серверы с низкими задержками и малым потреблением памяти благодаря своей системе управления памятью. 
+Благодаря сильным асинхронным возможностям и эффективной многозадачности, \texttt{Rust} идеально подходит для обработки большого числа одновременных запросов в web-приложениях.
 
-\subsubsection{База данных приложения}
+\subsubsection{OpenAPI}
 
-В качестве системы управления базой данных~\cite{subd} (СУБД) используется \\* \texttt{Datomic}~\cite{datomic} -- распределённая база данных класса NoSQL~\cite{nosql}, реализующая язык логических операций \texttt{Datalog} ~\cite{datalog}. В качестве сервиса хранения используется база данных~\cite{database} \texttt{PostgreSQL}~\cite{postgresql}.
+Спецификация \texttt{OpenAPI} (OAS) определяет стандартный, не зависящий от языка интерфейс для HTTP API, который позволяет как людям, так и компьютерам обнаруживать и понимать возможности сервиса без доступа к исходному коду, документации или с помощью проверки сетевого трафика. 
+При правильном определении потребитель может понимать удаленный сервис и взаимодействовать с ним с минимальным количеством логики реализации.
 
-Особенностью рассматриваемой СУБД является связь каждой транзакции с текущим временем, база данных хранит историю всех операций, что позволяет получить её состояние в любой момент времени, такой подход позволяет реализовать режим просмотра истории изменения данных, являющийся аналогом журналирования.
+Спецификация \texttt{OpenAPI} затем может быть использована инструментами создания документации для отображения API, инструментами генерации кода для создания серверов и клиентов на различных языках программирования, инструментами тестирования и многими другими вариантами использования~\cite{openapi}.
 
-\texttt{Datomic} предоставляет транзакции, соответствующие принципам \\* \texttt{ACID}~\cite{acid} и состоит из механизма изменения состояния базы данных -- транзактора, сервиса хранилища данных и пользовательского сервиса, который отсылает данные на транзактор. Оптимальная скорость работы достигается за счёт зарезервированных инструкций и консистентности данных, встроенного в транзактор механизма кэширования запросов как на чтение, так и на запись, и отсутствия планировщика транзакций. Унификация данных структурой вида <<ключ-значение>> позволяет достичь согласованности, в качестве ключа может быть как зарезервированное слово, так и атрибут сущности или хранимая процедура.
+\subsubsection{Axum}
 
-Главной особенностью является возможность пользователя полностью влиять на системные настройки и отсутствие явных правил формирования запроса. Неумелое обращение с данной СУБД может привести к результатам на порядок хуже, чем в традиционных реализациях, например, отсутствие планировщика транзакций может значительно замедлить выполнение составного запроса.
+\texttt{Axum} - это фреймворк для веб-приложений, который фокусируется на эргономике и модулярности~\cite{axum}.
 
-\subsection{Создание запроса}
+\texttt{Axum} предлагает гибкую систему маршрутизации, промежуточное программное обеспечение, асинхронные обработчики, поддержку JSON и форм-кодированных тел запросов, а также интеграцию с другими \texttt{Rust} библиотеками.
 
-База данных представлена в виде фактов и отношений~\cite{datomic-facts}, каждая запись имеет следующую структуру: \texttt{[}сущность атрибут значение транзакция \texttt{'\_]}, запрос представлен хеш-картой~\cite{hash-map} вида <<ключ-значение>>.
+\subsubsection{TypeScript}
+В качестве языка программирования для написания интерфейса был выбран \texttt{TypeScript}.
 
-Структура запроса состоит из трёх ключей:
-\begin{itemize}
-	\item \texttt{:find} -- содержит свободный набор переменных, которые будут использованы для итогового формирования выборки;
-	\item \texttt{:in} -- содержит источники данных, которые будут использованы в запросе;
-	\item \texttt{:where} -- содержит набор правил, которые записывают значения атрибутов в свободные переменные и используют источники данных для постановки логического вопроса.
-\end{itemize}
+\texttt{Typescript} --- это язык программирования высокого уровня с открытым исходным кодом, разработанный \texttt{Microsoft}, который добавляет статическую типизацию с необязательными аннотациями типов в \texttt{JavaScript}.~\cite{TypeScript}
+Поскольку \texttt{TypeScript} является надмножеством \texttt{JavaScript}, все программы на \texttt{JavaScript} синтаксически корректны на \texttt{TypeScript}, но они могут не выполнять проверку типов по соображениям безопасности.
 
-Например, для того, чтобы в базе данных музыкантов и их музыкальных релизов найти все релизы по имени музыканта, можно использовать запрос, представленный в листинге \ref{code:query}. \\
+\subsubsection{Next.js}
 
-\begin{lstlisting}[label=code:query, caption={Пример запроса}]
-(d/q {:find ?release-name
-      :in $ ?artist-name
-      :where [?artist :artist/name ?artist-name]
-             [?release :release/artists ?artist]
-             [?release :release/name ?release-name]}
-      db "John Lenon")
-      
-=> #{["Power to the People"] 
-     ["Unfinished Music No. 2: Life With the Lions"] 
-     ["Live Peace in Toronto 1969"] 
-     ["Live Jam"]
-     ...}
-\end{lstlisting}
+В рамках языка \texttt{TypeScript} был выбран web-framework \texttt{Next.js}~\cite{nextjs}.
 
-Для формирования запроса используется хеш-карта, каждый ключ запроса будет формироваться на основе наличия или отсутствия параметров критерия. Обновление параметров запроса осуществляется с помощью оператора условного перехода \texttt{cond} вместе с потоковым макросом~\cite{threading-macro} \texttt{->}. Для обновления значения ключей используются стандартные операторы \texttt{update} и \texttt{conj}. Пример формирования запроса представлен в листинге \ref{code:query-build}. Результатом запроса является коллекция сущностей, отфильтрованная с помощью критерия.
+\texttt{Next.js} это фреймворк \texttt{React} для создания многофункциональных веб-приложений. 
+Компоненты \texttt{React} используются для создания пользовательских интерфейсов, и \texttt{Next.js} для получения дополнительных функций и оптимизации.
 
-\begin{lstlisting}[label=code:query-build, caption={Создание запроса}]
-(cond-> '{:find [?x]
-          :in [$]
-          :where []}
-  report-param-1
-  (-> (update :in conj '[?report-param-1...])
-      (update :where
-              conj
-              '[?rp-1 ?attr ?report-param-1]))
+\texttt{Next.js} также абстрагирует и автоматически настраивает инструменты, необходимые для \texttt{React}, такие как пакетирование, компиляция и многое другое. 
+
+\subsubsection{React}
+
+\texttt{React} --- это \texttt{JavaScript}-библиотека для разработки пользовательского интерфейса.
+
+Компонентный подход, используемый в \texttt{React}, упрощает создание переиспользуемых элементов пользовательского интерфейса и облегчает управление состоянием приложения. 
+Благодаря внутренней архитектуре, \texttt{React} обеспечивает высокую производительность и быстрое отображение компонентов на веб-странице.
+
+\subsection{Разработка серверной части приложения}
+Разработка серверной части согласовывалась с остальной частью команды.
+
+\subsection{OpenAPI Спецификация}
+
+Прежде чем приступить к фактическому написанию серверной части, было согласовано публичное API. В листинге~\ref{lst:openapi} представлена часть согласованной API:
+
+\begin{lstlisting}[label=lst:openapi, caption={Часть запросов согласно спецификации OpenAPI}, style=yaml]
+openapi: 3.1.0
+servers:
+  - url: "0.0.0.0:4000"
+    description: stub
+info:
+  version: 0.1.0
+  title: Bob OpenAPI
+  description: Bob server OpenAPI schema
+  license:
+    name: Unlicensed
+paths:
+  /api/login:
+    post:
+      operationId: login
+      summary: Authorize user
+      description: Connect user to the Node and authorize them if necessary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BobConnectionData"
+            examples:
+              Example 1:
+                value:
+                  hostname: "0.0.0.0:8000"
+                  credentials:
+                    login: archeoss
+                    password: "1234"
+              Example 2:
+                value:
+                  hostname: "0.0.0.0:8000"
+        description: Data needed for the connection
+      responses:
+        "200":
+          description: Ok
+          headers:
+            set-cookie:
+              schema:
+                type: string
+                example: "sid=cT98Ao6mkYnkp4QJ48pxaKkB5ScYqulS9BxauJFQpeQ=4hkEhWeG7nGSO/omtatgAxKS6uDGKcXnm2z/JW31MW9Ta39zFozivhLuMQGWD+E9Pudlw5Hs22gMyWirmthaSw==; HttpOnly; SameSite=Strict; Secure; Path=/; Expires=Fri, 14 Jul 2023 00:48:44 GMT"
+              description: Successfully authenticated. The session ID is returned in a cookie named `sid`. You need to include this cookie in subsequent requests.
+        "401":
+          description: Unauthorized
+        "404":
+          description: Server Not Found
+      parameters: []
+    parameters: []
+  /api/logout:
+    get:
+      summary: ""
+      operationId: logout
+      responses:
+        "200":
+          description: OK
+      description: Logout user from the Node
+      parameters: []
+  /api/nodes:
+    get:
+      operationId: getNodes
+      summary: List of Nodes
+      description: Returns a list of all known nodes on cluster
+      parameters: []
+      responses:
+        "200":
+          description: Node list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Node"
+        "401":
+          description: Unauthorized
+      security:
+        - ApiKeyAuth: []
+  /api/vdisks:
+    get:
+      operationId: getVdisks
+      summary: List of VDisks
+      description: Returns a list of all vdisks on cluster
+      parameters: []
+      responses:
+        "200":
+          description: Virtual disks list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VDisk"
+        "401":
+          description: Unauthorized
+      security:
+        - ApiKeyAuth: []
+  /api/disks/count:
+    get:
+      operationId: getDisksCount
+      summary: List of Disks
+      description: Returns a list with count of physical disks per status
+      parameters: []
+      responses:
+        "200":
+          description: Disk count per status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiskCount"
+              examples:
+                Example 1:
+                  value:
+                    good: 5
+                    bad: 10
+                    offline: 50
+        "401":
+          description: Unauthorized
+      security:
+        - ApiKeyAuth: []
+    parameters: []
   ...
 \end{lstlisting}
 
-\subsection{Обработка и конвертация данных}
+\subsubsection{Клиентская часть}
+В клиентском участке серверной части был определен трейт `API` - листинг~\ref{lst:api} для определения методов, доступных на кластере BOB.
 
-Чтобы сконвертировать выборку в коллекцию транспортных объектов необходимо предварительно получить все необходимые значения полей. Каждая сущность представляет собой хеш-карту, достаточно извлечь необходимые значения атрибутов. Пример деструктуризации~\cite{destructuring} сущности представлен в листинге \ref{code:destructure}.
+\begin{lstlisting}[label=lst:api, caption={Трейт API}, language=Rust]
+#[async_trait]
+pub trait Api<C: Send + Sync> {
+    fn poll_ready(&self, _cx: &mut Context
+      ) -> Poll<Result<(), Box<dyn Error + Send + Sync + 'static>>> {
+        Poll::Ready(Ok(()))
+    }
 
-\begin{lstlisting}[label=code:destructure, caption={Деструктуризация сущности}]
-(defn- rasterize
-  [{:entity/keys [key-1 key-2 key-3]}]
-  (assoc-some
-    {:key-1 key-1
-     :key-2 key-2
-     :key-3 key-3}))
- 
-(->> query-result
-     (map rasterize))
+    /// Return directory of alien
+    async fn get_alien_dir(&self, context: &C) -> Result<GetAlienDirResponse, ApiError>;
+
+    /// Returns the list of disks with their states
+    async fn get_disks(&self, context: &C) -> Result<GetDisksResponse, ApiError>;
+
+    /// Get metrics
+    async fn get_metrics(&self, context: &C) -> Result<GetMetricsResponse, ApiError>;
+
+    /// Returns a list of known nodes
+    async fn get_nodes(&self, context: &C) -> Result<GetNodesResponse, ApiError>;
+
+    /// Returns a partition info by ID
+    async fn get_partition(
+        &self,
+        v_disk_id: i32,
+        partition_id: String,
+        context: &C,
+    ) -> Result<GetPartitionResponse, ApiError>;
+
+    /// Returns a list of partitions
+    async fn get_partitions(&self, v_disk_id: i32, context: &C,
+    ) -> Result<GetPartitionsResponse, ApiError>;
+
+    /// Returns count of records of this on node
+    async fn get_records(
+        &self,
+        v_disk_id: i32,
+        context: &C,
+    ) -> Result<GetRecordsResponse, ApiError>;
+
+    /// Returns directories of local replicas of vdisk
+    async fn get_replicas_local_dirs(
+        &self,
+        v_disk_id: i32,
+        context: &C,
+    ) -> Result<GetReplicasLocalDirsResponse, ApiError>;
+
+    /// Get space info
+    async fn get_space_info(&self, context: &C) -> Result<GetSpaceInfoResponse, ApiError>;
+
+    /// Returns information about self
+    async fn get_status(&self, context: &C) -> Result<GetStatusResponse, ApiError>;
+
+    /// Returns a vdisk info by ID
+    async fn get_v_disk(&self, v_disk_id: i32, context: &C) -> Result<GetVDiskResponse, ApiError>;
+
+    /// Returns a list of vdisks
+    async fn get_v_disks(&self, context: &C) -> Result<GetVDisksResponse, ApiError>;
+
+    /// Returns server version
+    async fn get_version(&self, context: &C) -> Result<GetVersionResponse, ApiError>;
+
+    /// Returns configuration of the node
+    async fn get_configuration(&self, context: &C) -> Result<GetConfigurationResponse, ApiError>;
+}
 \end{lstlisting}
 
-Для конвертации был написан макрос преобразования типов полей. Конвертация происходит согласно заранее определённому типу транспортного объекта. Для каждого типа отчёта, создаётся своя функция для конвертации. Данный подход позволяет расширять список поддерживаемых типов отчётов.
+\subsubsection{Методы авторизации}
+Для авторизации был определен соответственный метод, описанный в листинге~\ref{lst:auth}:
+
+\begin{lstlisting}[label=lst:auth, caption={Метод Авторизации}, language=Rust]
+pub async fn login(
+    State(store): State<Arc<RwLock<BobStore<Hostname>>>>,
+    mut auth: AuthContext<Hostname, BobClient, SocketBobMemoryStore>,
+    Extension(request_timeout): Extension<RequestTimeout>,
+    Json(bob): Json<BobConnectionData>,
+) -> AxumResult<StatusCode> {
+    tracing::info!("post /login : {:?}", &bob);
+    let hostname = bob.hostname.clone();
+
+    let Ok(bob_client) = BobClient::try_new(bob, request_timeout).await else {
+        tracing::warn!("Couldn't create client");
+        return Err(StatusCode::UNAUTHORIZED.into());
+    };
+    let Ok(res) = bob_client.probe().await else {
+        return Err(StatusCode::UNAUTHORIZED.into());
+    };
+    tracing::info!("received {res} from BOB");
+
+    if res == StatusCode::OK {
+        if let Err(err) = auth.login(&bob_client).await {
+            tracing::warn!("Couldn't login the user. Err: {err}, User: {bob_client:?}");
+            return Err(StatusCode::UNAUTHORIZED.into());
+        };
+        store.write().await.insert(hostname, bob_client);
+        tracing::info!("AUTHORIZATION SUCCESSFUL");
+        tracing::info!("Logged in as {:?}", &auth.current_user);
+    }
+
+    Ok(res)
+}
+\end{lstlisting}
+
+\subsubsection{Методы публичного API}
+
+Для взаимодействия с графическим интерфейсом были написаны методы, определенные ранее в API. Один из таких методов представлен в листинге~\ref{lst:method}:
+
+\begin{lstlisting}[label=lst:method, caption={Метод публичного API}, language=Rust]
+pub async fn get_nodes_count(Extension(client): Extension<BobClient>) -> Json<NodeCount> {
+    tracing::info!("get /nodes/count : {:?}", client);
+
+    let mut metrics: FuturesUnordered<_> = client
+        .cluster()
+        .map(move |node| {
+            let handle = node.clone();
+            tokio::spawn(async move { handle.get_metrics().await })
+        })
+        .collect();
+
+    let mut count = NodeCount::new();
+
+    let mut counter = 0;
+    while let Some(res) = metrics.next().await {
+        if let Ok(Ok(client::GetMetricsResponse::Metrics(metrics))) = res {
+            tracing::info!("#{counter}: metrics received successfully");
+            let metrics = Into::<TypedMetrics>::into(metrics);
+            if is_bad_node(&metrics) {
+                count[Bad] += 1;
+            } else {
+                count[Good] += 1;
+            }
+        } else {
+            tracing::warn!("#{counter}: couldn't receive metrics from node");
+            count[Offline] += 1;
+        }
+        counter += 1;
+    }
+    tracing::info!("total nodes per status count: {count:?}");
+
+    Json(count)
+}
+\end{lstlisting}
+
+\subsection{Демонстрация работы веб-приложения}
+
+На рисунке~\ref{fig:auth} изображена страница авторизации, где пользователь должен обязательно ввести адрес и порт, а также логин и пароль:
+
+\begin{figure}[!htbp]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{inc/auth.png}
+  \end{center}
+  \caption{Страница авторизации}\label{fig:auth}
+\end{figure}
 
 \clearpage
-\begin{lstlisting}[label=code:macro, caption={Макрос конвертации в транспортный объект}]
-(defmacro def-converter
-  [report-type]
-  (let [dto-class (symbol (csk/->PascalCaseString report-type))
-        type-info (clojure.reflect/reflect (resolve dto-class))
-        members (:members type-info)
-        setters (filter #(string/starts-with? (:name %) "set")) members)
-        fn-name (symbol (str "make-" report-type "-record"))]
-    `(defn ~(with-meta fn-name {:report-type report-type})
-       [~'item]
-       (let [~'record (new ~dto-class)]
-         ~@(map (fn [setter]
-                  (let [setter-name (str (:name setter))
-                        item-key (csk/->kebab-case-keyword
-                                  (subs setter-name (count "set")))
-                        setter-fn (symbol (str "." setter-name))
-                        [field-type] (:parameter-types setter)
-                        converter-fn (or (get field->converter item-key)
-                                         (case field-type
-                                           java.lang.Long 'long
-                                           java.lang.Float 'float
-                                           dto.type-1 'coverter-type-1
-                                           nil))]
-                    (if (= field-type 'java.util.List)
-                      (let [converter-fn (get field->converter item-key)]
-                        `(let [~'l (ArrayList.)]
-                           (doseq [~'v (~item-key ~'item)]
-                             (.add ~'l ~(if converter-fn
-                                          `(~converter-fn ~'v)
-                                          'v)))
-                           (~setter-fn ~'record ~'l)))
-                      `(~setter-fn ~'record 
-                                   ~(if converter-fn
-                                        `(~converter-fn (~item-key ~'item))
-                                        `(~item-key ~'item))))))
-                setters)
-         ~'record))))
-\end{lstlisting}
 
-\subsection{Сериализация объектов}
+На рисунке~\ref{fig:panel1} изображена страница мониторинга ресурсов кластера BOB, которая обновляется в реальном времени, обновление можно как отключить, так и установить частоту обновления информации:
 
-Для передачи данных в сервис была написана функция сериализации в \texttt{JSON}-объект. Исходный код функции представлен в листинге \ref{code:serialize}.
-
-\begin{lstlisting}[label=code:serialize, caption={Сериализация объектов}]
-(fn [stream]
-  (try
-    (with-open [writer (io/writer stream)]
-      (let [^ObjectMapper object-mapper (make-object-mapper)]
-        (let [report-info (doto (ReportRequestInfo.) ...)
-              json-string (.writeValueAsString object-mapper report-info)]
-          (.write writer json-string)
-          (.write writer "\r\n"))
-
-        (doseq [item items]
-          (let [json-string (.writeValueAsString object-mapper
-                                                 (make-record item))]
-            (.write writer json-string)
-            (.write writer "\r\n")))
-
-        (.write writer ".")
-        (.write writer "\r\n")))
-    (catch Throwable t
-      (log/error t "Unable to transfer report data")
-      (throw t))))
-\end{lstlisting}
+\begin{figure}[!htbp]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{inc/panel1.png}
+  \end{center}
+  \caption{Домашняя страница с основными параметрами кластера}\label{fig:panel1}
+\end{figure}
 
 \clearpage
 
+На рисунке~\ref{fig:panel2} изображена информация по всем нодам:
+
+\begin{figure}[!htbp]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{inc/panel2.png}
+  \end{center}
+  \caption{Страница с нодами}\label{fig:panel2}
+\end{figure}
+
+\clearpage
+
+На рисунке~\ref{fig:detailed_panel} изображена детальная информация по выбранной ноде из
+списка предоставленного на рисунке~\ref{fig:panel2}:
+
+\begin{figure}[!htbp]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{inc/detailed_panel.png}
+  \end{center}
+  \caption{Страница с подробной информацией о ноде}\label{fig:detailed_panel}
+\end{figure}
+
+\clearpage
+
+На рисунке~\ref{fig:panel3} изображена информация по всем виртуальным дискам:
+
+\begin{figure}[!htbp]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{inc/panel3.png}
+  \end{center}
+  \caption{Cтраница с раскладкой виртуальных дисков}\label{fig:panel3}
+\end{figure}
+
+\clearpage
 
 \specsection{ЗАКЛЮЧЕНИЕ}
 
-В рамках производственной практики был реализован функционал получения выборки по заданному критерию, обработки, конвертации и сериализации данных.
+В ходе производственной практики были приобретены навыки в разработке веб-приложений и open source-проектов, а также было успешно разработано веб-приложение, предназначенное для эффективной работы с настройкой и управлением кластером BOB. 
 
-Так же были выполнены следующие задачи:
+Также были выполнены следующие индивдуальные задачи:
 \begin{enumerate}
-	\item утверждено техническое задание;
-	\item проведён анализ используемых предприятием технологий;
-	\item ознакомился с правилами создания запроса для функционально-\\* логической базы данных;
-	\item изучил инструменты для обработки и конвертации данных;
-	\item изучил способы сериализации данных.
+	\item получить навыки командной работы;
+	\item спроектировать и разработать клиент для взаимодействия с API~\cite{api} Боба;
+	\item спроектировать собственный API~\cite{api};
+	\item разработать серверную часть веб-приложения, интегрируя в него ранее разработанный клиент и API~\cite{api};
+	\item провести тестирование итогового Web-приложения.
 \end{enumerate}
-
 
 \clearpage
 

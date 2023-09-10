@@ -71,7 +71,7 @@
 %\hypersetup{citecolor=blue}
 \hypersetup{citecolor=black}
 
-\usepackage{listings}
+\usepackage{listings, listings-rust}
 \lstset{
 	basicstyle=\footnotesize\ttfamily,
 	language=XML,
@@ -93,6 +93,16 @@
 	keepspaces=true
 }
 
+\lstdefinestyle{yaml}{
+     basicstyle=\color{blue}\footnotesize,
+     rulecolor=\color{black},
+     string=[s]{'}{'},
+     stringstyle=\color{blue},
+     comment=[l]{:},
+     commentstyle=\color{black},
+     morecomment=[l]{-}
+ }
+
 \usepackage{ulem} % Нормальное нижнее подчеркивание
 \usepackage{hhline} % Двойная горизонтальная линия в таблицах
 \usepackage[figure,table]{totalcount} % Подсчет изображений, таблиц
@@ -110,3 +120,5 @@
 
 \usepackage{amsmath}
 \usepackage{slashbox}
+
+\lstset{language=Rust}
